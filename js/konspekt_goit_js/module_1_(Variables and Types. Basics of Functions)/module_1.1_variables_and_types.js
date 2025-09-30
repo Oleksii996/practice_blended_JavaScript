@@ -2,12 +2,10 @@
 {
   let price = 20;
   console.log(price); // 20
-}
-{
+
   let age = 20;
   console.log(age); // 20
-}
-{
+
   const username = "Mango";
   console.log(username); // "Mango"
 }
@@ -32,15 +30,25 @@
   const age = 20;
   const salary = 3710.84;
 }
-// Number
+// String
 {
   const username = "Mango995";
   const description = "JavaScript is awesome!";
 }
-// Number
+// Boolean
 {
   const isModalOpen = true;
   const isLoggedIn = false;
+}
+
+// Null and Undefined
+{
+  let value = null;
+  console.log(value); // null
+}
+{
+  let value;
+  console.log(value); // undefined
 }
 //#endregion
 
