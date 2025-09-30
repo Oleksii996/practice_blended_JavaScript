@@ -37,8 +37,6 @@ let;
 
 const userMinutes = Number(prompt("введіть кількість хвилин"));
 
-function formatTime(totalMinutes) {
-    
-}
+function formatTime(totalMinutes) {}
 
 console.log(formatTime(userMinutes));
