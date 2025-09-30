@@ -16,8 +16,7 @@
   let username = "Mango";
   username = "Poly";
   console.log(username); // "Poly"
-}
-{
+
   let productPrice = "1500EUR";
   productPrice = "1800USD";
   console.log(productPrice); // "Poly"
