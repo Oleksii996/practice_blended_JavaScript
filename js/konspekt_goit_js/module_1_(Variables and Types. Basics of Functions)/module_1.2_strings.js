@@ -36,7 +36,71 @@
 {
   const guestName = "Mango";
   const roomNumber = 207;
+  const greeting =
+    "Welcome " + guestName + ", your room number is " + roomNumber + "!";
+  console.log(greeting); // "Welcome Mango, your room number is 207!"
+}
+{
+  const guestName = "Mango";
+  const roomNumber = 207;
   const greeting = `Welcome ${guestName}, your room number is ${roomNumber}!`;
   console.log(greeting); // "Welcome Mango, your room number is 207!"
+}
+//#endregion
+
+//#region Властивості рядків (String Properties)
+
+// Довжина рядка (length)
+{
+  const productName = "Repair droid";
+  // Якщо у змінній зберігається рядок
+  console.log(productName.length); // 12
+  // Якщо рядковий літерал
+  console.log("Repair droid".length); // 12
+}
+{
+  const username = "Poly";
+  const message = `Username ${username} is ${
+    username.length + 2
+  } characters long`;
+  console.log(message); // Username Poly is 6 characters long
+}
+
+//Властивість: Індексація рядків (index)
+{
+  const product = "Repair droid";
+  console.log(product[0]); // 'R'
+  console.log(product[5]); // 'r'
+  console.log(product[11]); // 'd'
+}
+{
+  const product = "Repair droid";
+  const lastElementIndex = product.length - 1;
+  console.log(product[lastElementIndex]); // 'd'
+}
+{
+  const product = "Repair droid";
+  console.log(product[product.length - 1]); // 'd'
+}
+{
+  const courseTopic = "JavaScript essentials";
+
+  const courseTopicLength = courseTopic.length;
+  const firstElement = courseTopic[0];
+  const lastElement = courseTopic[courseTopic.length - 1];
+
+  console.log(courseTopic.length); // '21'
+  console.log(courseTopic[0]); // 'J'
+  console.log(courseTopic[courseTopic.length - 1]); // 's'
+}
+
+//Властивість: Незмінність рядків (immutability)
+{
+  let product = "Droid";
+  console.log(product); // "Droid"
+
+  // Це не має жодного ефекту
+  product[2] = "G";
+  console.log(product); // "Droid"
 }
 //#endregion
