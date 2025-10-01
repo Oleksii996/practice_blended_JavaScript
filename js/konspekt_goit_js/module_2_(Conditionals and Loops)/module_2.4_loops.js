@@ -23,3 +23,16 @@
     clientCounter += 1;
   }
 }
+
+//Якби нам потрібно було написати функцію:
+{
+  function countClients(clientCounter, maxClients) {
+    let counter = clientCounter; // створюємо локальну змінну
+
+    while (counter < maxClients) {
+      console.log(counter);
+      counter += 1;
+    }
+  }
+  countClients(18, 25);
+}
