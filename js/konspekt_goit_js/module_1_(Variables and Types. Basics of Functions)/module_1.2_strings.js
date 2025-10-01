@@ -98,7 +98,6 @@
 {
   let product = "Droid";
   console.log(product); // "Droid"
-
   // Це не має жодного ефекту
   product[2] = "G";
   console.log(product); // "Droid"
