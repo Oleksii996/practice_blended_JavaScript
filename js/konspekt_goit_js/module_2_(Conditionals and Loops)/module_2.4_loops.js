@@ -213,14 +213,103 @@
 
 {
   for (let i = 0; i < 10; i += 1) {
-    console.log(i);
+    console.log(i); // Лог виконається, поки i менше 10
 
     if (i === 5) {
+      // коли i дорівнює 5
       console.log("Met the number 5, interrupt the execution of the cycle");
       break;
     }
   }
 
-  console.log("Log after cycle");
+  console.log("Log after cycle"); // Цей лог виконається після завершення циклу
 }
+
+//Приклад-функція
+{
+  const start = 6;
+  const end = 17;
+  let number;
+
+  for (let i = start; i <= end; i += 1) {
+    if (i % 5 === 0) {
+      // перевірка ділення без остачі
+      number = i;
+
+      break; // перериваємо цикл після знаходження
+    }
+  }
+
+  console.log("Result:", number); // 10
+  console.log("Log after cycle"); // Цей лог виконається після завершення циклу
+}
+//#endregion
+
+//#region Оператор break і функції
+//Коли оператор break зустрічається всередині циклу, виконання циклу негайно припиняється, і керування передається на наступну інструкцію за циклом, навіть якщо цикл знаходиться всередині функції. Тобто оператор break не припиняє виконання функції, а тільки перериває цикл.
+{
+  function findNumber(max, target) {
+    console.log("Log in the body of the function before the cycle");
+
+    for (let i = 5; i <= max; i += 1) {
+      console.log("Current counter value i:", i);
+
+      if (i === target) {
+        console.log(`Found the number $ {target}, interrupt the cycle`);
+        break;
+      }
+    }
+
+    console.log("Log in body function after cycle");
+  }
+
+  findNumber(10, 6);
+  console.log("Log after exiting function");
+}
+
+//Для того щоб переривати виконання одразу циклу і функції і повернути результат у зовнішній код, є оператор return.
+// У прикладі шукаємо число 6. Щойно виконається умова if, робимо повернення, яке перерве виконання циклу і функції.
+{
+  function findNumber(max, target) {
+    console.log("Log in the body of the function before the cycle");
+
+    for (let i = 5; i <= max; i += 1) {
+      console.log("Current counter value i:", i);
+
+      if (i === target) {
+        console.log(
+          `Found the number $ {target}, we make a return, interrupting the loop and function`
+        );
+        return i;
+      }
+    }
+
+    // Цей console.log не виконується
+    console.log("Log in body function after cycle");
+  }
+
+  const result = findNumber(10, 6);
+  console.log("Log after exiting function");
+  console.log(`Result of function execution ${result}`);
+}
+
+//Приклад-функція
+
+{
+  function findNumber(start, end, divisor) {
+    for (let i = start; i <= end; i += 1) {
+      if (i % divisor === 0) {
+        // перевірка ділення без остачі
+        return i;
+      }
+    }
+  }
+
+  console.log(findNumber(2, 6, 5)); // 5
+  console.log(findNumber(8, 17, 3)); // 9
+  console.log(findNumber(6, 9, 4)); // 8
+  console.log(findNumber(16, 35, 7)); // 21
+  console.log(findNumber(42, 76, 10)); // 21
+}
+
 //#endregion
