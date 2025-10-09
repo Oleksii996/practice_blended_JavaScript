@@ -64,6 +64,21 @@
   console.log(slugParts); // ["amazing", "french", "recipes"]
 }
 
+//Приклад-функція
+// Сервісу гравірування прикрас потрібна функція, яка б автоматично рахувала ціну гравірування, залежно від кількості слів і ціни за слово.
+// Оголошена функція calculateEngravingPrice(message, pricePerWord). Ця функція приймає першим параметром рядок, що складається зі слів, розділених лише пробілами (параметр message) та другим параметром - число, що містить ціну гравірування за одне слово (параметр pricePerWord).
+// Доповни тіло функції так, щоб вона повертала загальну вартість гравірування усіх слів в рядку.
+
+{
+  function calculateEngravingPrice(message, pricePerWord) {
+    const words = message.split(" ");
+    return words.length * pricePerWord;
+  }
+
+  console.log(calculateEngravingPrice("JavaScript is in my blood", 10)); // 50
+  console.log(calculateEngravingPrice("JavaScript is in my blood", 20)); // 100
+  console.log(calculateEngravingPrice("JavaScript is in my blood", 40)); // 200
+}
 //#endregion
 
 //#region
