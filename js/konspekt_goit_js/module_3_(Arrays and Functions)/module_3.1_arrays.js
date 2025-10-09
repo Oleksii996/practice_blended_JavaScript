@@ -91,7 +91,27 @@ console.log(planets[999]); // undefined
 // Функція getLastElementMeta(array) приймає один параметр array - масив довільних значень. Доповни код функції таким чином, щоб вона повертала новий масив з двох елементів:
 // перший елемент - це індекс останнього елементу у масиві array
 // другий елемент - це значення останнього елементу у масиві array
+
 {
-  function getLastElementMeta(array) {}
+  function getLastElementMeta(array) {
+    return [array.length - 1, array[array.length - 1]];
+  }
+
+  console.log(getLastElementMeta(["apple", "peach", "pear", "banana"])); //
+  console.log(getLastElementMeta(["apple", "peach", "pear"])); //
 }
+
+//Приклад-функція
+// Функція getExtremeElements(array) приймає один параметр array - масив елементів довільної довжини. Доповни код функції таким чином, щоб вона повертала масив з двох елементів - першого і останнього елементів параметра array.
+
+{
+  function getExtremeElements(array) {
+    return [array[0], array[array.length - 1]];
+  }
+
+  console.log(getExtremeElements(["Earth", "Venus"])); //
+  console.log(getExtremeElements(["apple", "peach", "pear", "pear", "banana"])); //
+  console.log(getExtremeElements([1, 2, 3, 4, 5])); //
+}
+
 //#endregion
