@@ -47,4 +47,51 @@ console.log(planets[999]); // undefined
   planets[2] = "Neptune";
   console.log(planets); // ['Jupiter', 'Mars', 'Neptune', 'Uranus']
 }
+
+//#endregion
+
+//#region Довжина масиву (Length of an Array)
+//Довжина масиву, тобто кількість його елементів, зберігається у властивості length. Це динамічна величина, яка автоматично змінюється під час додавання або видалення елементів.
+{
+  const planets = ["Earth", "Mars", "Venus"];
+  console.log(planets.length); // 3
+}
+
+//приклад
+{
+  const planets = ["Earth", "Mars", "Venus"];
+
+  if (planets.length >= 3) {
+    console.log("3 or more elements");
+  } else {
+    console.log("3 or less elements");
+  }
+}
+
+//Приклад-функція
+// Функція getOrderQuantity(order) приймає один параметр order - масив рядків, які описують продукти в замовленні клієнта. Доповни код функції таким чином, щоб вона повертала число, що дорівнює кількості елементів масиву.
+{
+  function getOrderQuantity(order) {
+    return order.length;
+  }
+}
+
+//#endregion
+
+//#region Індекс останнього елемента масиву (Index of the Last Array Element)
+// Щоб знайти значення останнього елемента масиву, нам потрібно знати його індекс. Індекс останнього елемента можна визначити за допомогою формули довжина_масиву -1. Оскільки індексація елементів масиву починається з 0, а довжина масиву зберігає загальну кількість елементів, віднімаючи 1 від довжини масиву, ми отримуємо індекс останнього елемента.
+
+{
+  const planets = ["Earth", "Mars", "Venus"];
+  const lastElementIndex = planets.length - 1;
+  console.log(planets[lastElementIndex]); // "Venus"
+}
+
+//Приклад-функція
+// Функція getLastElementMeta(array) приймає один параметр array - масив довільних значень. Доповни код функції таким чином, щоб вона повертала новий масив з двох елементів:
+// перший елемент - це індекс останнього елементу у масиві array
+// другий елемент - це значення останнього елементу у масиві array
+{
+  function getLastElementMeta(array) {}
+}
 //#endregion
