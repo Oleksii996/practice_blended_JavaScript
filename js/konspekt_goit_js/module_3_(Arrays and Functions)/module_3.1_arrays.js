@@ -167,7 +167,7 @@ console.log(planets[999]); // undefined
   const arr2 = [1, 2, 3];
 
   console.log(arr1 === arr2); // false
-  console.log([] === []); // false
+  console.log([4] === [4]); // false
 }
 //#endregion
 
