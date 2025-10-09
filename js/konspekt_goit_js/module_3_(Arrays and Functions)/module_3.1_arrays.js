@@ -115,3 +115,107 @@ console.log(planets[999]); // undefined
 }
 
 //#endregion
+
+//#region Присвоєння за посиланням і за значенням (by reference and by value)
+
+//Примітиви: рядки, числа, буль, null і undefined, під час присвоювання копіюються цілком, за значенням (by value).
+// Зі складними типами все не так. У змінній, якій, наприклад, присвоєно масив, зберігаються не самі значення елементів масиву, а адреса того місця в пам'яті, де цей масив розташовано. Іншими словами — посилання (покажчик) на нього. Отже, вони передаються за посиланням (by reference).
+
+//Усі примітивні типи присвоюються за значенням, тобто створюється копія.
+{
+  let a = 5;
+
+  let b = a;
+  console.log(a); // 5
+  console.log(b); // 5
+  // Присвоєння за значенням, у пам'яті буде створено ще
+  // одну ячейку, в яку буде скопійовано значення 5
+
+  // Змінимо значення a
+  a = 10;
+  console.log(a); // 10
+  console.log(b); // 5 Значення b не змінилося, оскільки це окрема копія
+}
+
+//Масиви (складний тип) присвоюються за посиланням, тобто змінна просто отримує посилання (покажчик у пам'яті) на вже існуючий масив.
+{
+  const a = ["Mango", "Poly"];
+  const b = a;
+  console.log(a); // ["Mango", "Poly"]
+  console.log(b); // ["Mango", "Poly"]
+}
+
+//Змінимо масив, замінивши елемент з індексом 1, використовуючи посилання з a.
+{
+  const a = ["Mango", "Poly"];
+  const b = a;
+  console.log(a); // ["Mango", "Poly"]
+  console.log(b); // ["Mango", "Poly"]
+
+  a[1] = "Jacob";
+  console.log(a); // ["Mango", "Jacob"]
+  console.log(b); // ["Mango", "Jacob"]
+
+  b[0] = "Ajax";
+  console.log(a); // ["Ajax", "Jacob"]
+  console.log(b); // ["Ajax", "Jacob"]
+}
+
+//Два масиви ніколи не дорівнюють один одному, навіть якщо вони порожні або в них однакові елементи.
+{
+  const arr1 = [1, 2, 3];
+  const arr2 = [1, 2, 3];
+
+  console.log(arr1 === arr2); // false
+  console.log([] === []); // false
+}
+//#endregion
+
+//#region Приведення типів: масиви (Type Conversion: Arrays)
+//Масив → Рядок
+//При перетворенні масиву в рядок усі елементи масиву об'єднуються в один рядок, розділений комами.
+{
+  const array = [1, true, "Poly"];
+  console.log(String(array)); // "1,true,Poly"
+  console.log(array + "5"); // "1,true,Poly5"
+}
+
+//Масив → Число
+// При перетворенні масиву в число алгоритм складається з двох кроків: спочатку масив приводиться до рядка, а потім цей рядок приводиться до числового значення. Наприклад, порожній масив приводиться до порожнього рядка, який приводиться до числа 0.
+
+{
+  console.log(Number([])); // 0
+  console.log(Number([1])); // 1
+  console.log(Number([1, 2, 3])); // NaN
+}
+
+//Масив → Логічне значення (буль)
+// При перетворенні масиву в логічне значення будь-який масив, навіть порожній, перетворюється на true.
+{
+  const emptyArray = [];
+  const nonEmptyArray = [1, 2, 3];
+
+  console.log(Boolean(emptyArray)); // true
+  console.log(Boolean(nonEmptyArray)); // true
+
+  if (emptyArray) {
+    console.log("if is in progress");
+  } else {
+    console.log("else is not performed");
+  }
+
+  if (nonEmptyArray) {
+    console.log("if is in progress");
+  } else {
+    console.log("else is not performed");
+  }
+}
+//При перетворенні масиву в логічне значення масив перетворюється на true. Отже, виконається вираз тернарного оператора для істинної умови, а саме змінній result буде присвоєно значення "A".
+
+{
+  const array = [false];
+  const result = array ? "A" : "B";
+
+  console.log(result); // "A"
+}
+//#endregion
