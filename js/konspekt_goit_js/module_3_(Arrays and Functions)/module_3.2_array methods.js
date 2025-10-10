@@ -81,4 +81,42 @@
 }
 //#endregion
 
-//#region
+//#region Метод slice()
+// Метод масиву slice(begin, end) повертає новий масив, що містить копію частини вихідного масиву, не змінюючи його. Копія створюється від індексу begin до, але не включаючи індекс end.
+{
+  const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+  console.log(planets.slice(0, 2)); // ['Earth', 'Mars']
+  console.log(planets.slice(0, 4)); // ['Earth', 'Mars', 'Venus', 'Jupiter']
+  console.log(planets.slice(1, 3)); // ['Mars', 'Venus']
+}
+
+//Результат роботи методу slice() можна зберегти у змінну для подальшого використання:
+{
+  const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+  const result = planets.slice(1, 3);
+  console.log(result); // ["Mars", "Venus"]
+}
+
+//Якщо не вказати параметри begin і end, буде створено повну копію вихідного масиву:
+{
+  const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+  console.log(planets.slice()); // ["Earth", "Mars", "Venus", "Jupiter", "Saturn"]
+}
+
+//Якщо не вказати end, копіювання відбуватиметься від begin до кінця масиву:
+{
+  const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+  console.log(planets.slice(1)); // ["Mars", "Venus", "Jupiter", "Saturn"]
+  console.log(planets.slice(2)); // ["Venus", "Jupiter", "Saturn"]
+  console.log(planets.slice(4)); // ["Saturn"]
+  console.log(planets.slice(0)); // ["Earth", "Mars", "Venus", "Jupiter", "Saturn"]
+}
+
+//Якщо значення begin негативне, а end не вказано, будуть скопійовані останні begin елементів (тобто стільки елементів з кінця, скільки вказано в параметрі begin):
+{
+  const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+  console.log(planets.slice(-2)); // ["Jupiter", "Saturn"]
+  console.log(planets.slice(-4)); // ["Mars", "Venus", "Jupiter", "Saturn"]
+}
+
+//#endregion
