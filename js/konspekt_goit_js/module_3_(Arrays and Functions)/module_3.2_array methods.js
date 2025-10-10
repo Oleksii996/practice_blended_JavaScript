@@ -119,4 +119,90 @@
   console.log(planets.slice(-4)); // ["Mars", "Venus", "Jupiter", "Saturn"]
 }
 
+//Приклад-задача
+// Доповни код таким чином, щоб змінні містили часткові копії вихідного масиву fruits.
+// firstTwoEls - масив із перших двох елементів
+// nonExtremeEls - масив з усіх елементів, крім першого та останнього
+// lastThreeEls - масив із трьох останніх елементів
+
+{
+  const fruits = ["apple", "plum", "pear", "orange", "banana"];
+
+  const firstTwoEls = fruits.slice(0, 2);
+  const nonExtremeEls = fruits.slice(1, 4);
+  const lastThreeEls = fruits.slice(-3);
+
+  console.log(firstTwoEls); //
+  console.log(nonExtremeEls); //
+  console.log(lastThreeEls); //
+}
+
+//#endregion
+
+//#region Метод concat()
+// Метод concat(arr1, arr2, ..., arrN) використовується для об'єднання двох або більше масивів.
+
+{
+  const firstArray = ["Mercury", "Venus"];
+  const secondArray = ["Mars", "Jupiter"];
+  const result = firstArray.concat(secondArray);
+
+  console.log(result); // ["Mercury", "Venus", "Mars", "Jupiter"];
+}
+
+//Зверни увагу, що вихідні масиви firstArray і secondArray залишаються незмінними після виклику concat(). Метод concat() створює і повертає новий масив, що містить усі елементи об'єднаних масивів.
+{
+  const firstArray = ["Mercury", "Venus"];
+  const secondArray = ["Mars", "Jupiter"];
+  const result = firstArray.concat(secondArray);
+
+  console.log(firstArray); // ["Mercury", "Venus"];
+  console.log(secondArray); // ["Mars", "Jupiter"];
+  console.log(result); // ["Mercury", "Venus", "Mars", "Jupiter"];
+}
+
+//Порядок аргументів методу визначає порядок розташування елементів у новому масиві.
+{
+  const firstArray = ["Mercury", "Venus"];
+  const secondArray = ["Mars", "Jupiter"];
+  const thirdArray = ["Saturn", "Neptune"];
+
+  console.log(firstArray.concat(secondArray, thirdArray));
+  // ['Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn', 'Neptune'];
+
+  console.log(firstArray.concat(thirdArray, secondArray));
+  // ['Mercury', 'Venus', 'Saturn', 'Neptune', 'Mars', 'Jupiter', ];
+}
+
+//Приклад-задача
+// Оголоси змінну allClients та доповни код таким чином, щоб її значенням було посилання на масив, що складається з усіх елементів масивів oldClients і newClients. Спочатку мають іти елементи з масива oldClients, а потім з newClients.
+
+{
+  const oldClients = ["Mango", "Ajax", "Poly", "Kiwi"];
+  const newClients = ["Peach", "Houston"];
+
+  const allClients = oldClients.concat(newClients);
+
+  console.log(allClients); // ["Mango", "Ajax", "Poly", "Kiwi", "Peach", "Houston"]
+}
+
+//#endregion
+
+//#region Метод indexOf()
+// Метод масиву indexOf(elem) використовується для визначення індексу першого входження елемента elem у масиві. Він повертає індекс елемента, якщо він знайдений, або -1, якщо елемент не знайдений. Метод indexOf() виконує сувору рівність (===) при порівнянні елементів.
+
+// Синтаксис методу indexOf() має такий вигляд:
+{
+  array.indexOf(elem);
+}
+//array — масив, у якому здійснюється пошук.
+// elem — елемент, індекс якого потрібно знайти в масиві.
+
+//Приклад використання методу indexOf():
+{
+  const clients = ["Mango", "Ajax", "Poly", "Kiwi", "Poly"];
+  console.log(clients.indexOf("Poly")); // 2
+  console.log(clients.indexOf("Monkong")); // -1
+}
+
 //#endregion
