@@ -73,6 +73,8 @@ console.log(planets[999]); // undefined
 {
   function getOrderQuantity(order) {
     return order.length;
+
+    console.log(getOrderQuantity(["Milk", "Sugar", "Bread"])); // 3
   }
 }
 
