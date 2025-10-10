@@ -22,12 +22,38 @@
 
 {
   function calculateTotalPrice(order) {
-    for (let i = 0; i < order.length; i += 1) {}
+    let sum = 0; // змінна для збереження загальної суми
+    for (let i = 0; i < order.length; i += 1) {
+      sum += order[i];
+    }
+    return sum;
   }
 
   console.log(calculateTotalPrice([12, 85, 37, 4]));
   console.log(calculateTotalPrice([164, 48, 291]));
   console.log(calculateTotalPrice([412, 371, 94, 63, 176]));
+}
+
+//Приклад-задача
+// Функція getEvenNumbers(start, end) має два параметри start та end, які є цілими числами. Доповни код функції так, щоб вона повертала масив усіх парних чисел від start до end. Якщо жодного парного числа немає, то масив має бути пустим.
+// Парним вважається число, яке ділиться на 2 без остачі (10 % 2 === 0). Використовуй цикл for.
+
+{
+  function getEvenNumbers(start, end) {
+    const numbers = [];
+    for (let i = start; i <= end; i += 1) {
+      if (i % 2 === 0) {
+        // перевіряємо, чи число парне
+        numbers.push(i); // додаємо парне число в масив
+      }
+    }
+    return numbers;
+  }
+
+  console.log(getEvenNumbers(2, 5)); //
+  console.log(getEvenNumbers(3, 11)); //
+  console.log(getEvenNumbers(8, 8)); //
+  console.log(getEvenNumbers(6, 12)); //
 }
 
 //#endregion
