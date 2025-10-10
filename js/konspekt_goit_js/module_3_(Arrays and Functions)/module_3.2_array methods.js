@@ -191,10 +191,8 @@
 //#region Метод indexOf()
 // Метод масиву indexOf(elem) використовується для визначення індексу першого входження елемента elem у масиві. Він повертає індекс елемента, якщо він знайдений, або -1, якщо елемент не знайдений. Метод indexOf() виконує сувору рівність (===) при порівнянні елементів.
 
-// Синтаксис методу indexOf() має такий вигляд:
-{
-  array.indexOf(elem);
-}
+// Синтаксис методу indexOf() має такий вигляд: array.indexOf(elem);
+
 //array — масив, у якому здійснюється пошук.
 // elem — елемент, індекс якого потрібно знайти в масиві.
 
@@ -213,19 +211,65 @@
 // порожній масив, якщо в array немає елемента зі значенням value
 // підмасив, що починається з початку array і до елемента зі значенням value включно, якщо такий елемент є в array
 
-//Приклад-задача
 {
   function getSlice(array, value) {
-    const index = array.indexOf(value); // шукаємо індекс елемента
-    if (index === -1) return []; // якщо елемента немає → порожній масив
-    return array.slice(0, index + 1); // повертаємо підмасив від початку до елемента включно
+    if (array.indexOf(value) === -1) {
+      return []; // елемента немає → порожній масив
+    } else {
+      return array.slice(0, array.indexOf(value) + 1); // елемент є → повертаємо весь масив
+    }
   }
-
-  console.log(getSlice(["Mango", "Poly", "Ajax"], "Ajax")); //
+  console.log(getSlice(["Mango", "Poly", "Ajax", "Kiwi"], "Ajax")); //
   console.log(getSlice(["Mango", "Poly", "Ajax"], "Ajax")); //
   console.log(getSlice(["Mango", "Poly", "Ajax"], "Mango")); //
   console.log(getSlice(["Mango", "Poly", "Ajax"], "Jacob")); //
   console.log(getSlice(["Mango", "Poly", "Ajax"], "Casey")); //
+}
+
+//#endregion
+
+//#region Метод push()
+// Метод масиву push() використовується для додавання одного або більше елементів у кінець масиву.
+//Приклад використання методу push():
+
+{
+  const planets = ["Earth", "Mars", "Venus"];
+
+  planets.push("Jupiter");
+  console.log(planets); // ['Earth', 'Mars', 'Venus', 'Jupiter']
+
+  planets.push("Saturn", "Neptune");
+  console.log(planets); // ['Earth', 'Mars', 'Venus', 'Jupiter', "Saturn", "Neptune"]
+}
+
+//За допомогою циклу ми можемо виконувати повторювані операції і використовувати метод push для додавання нових елементів у масив на кожній ітерації. Це дуже корисно, коли нам потрібно створити масив з елементами, які можна динамічно додавати.
+{
+  const tags = [];
+
+  for (let i = 0; i < 3; i += 1) {
+    tags.push(`tag-${i}`);
+  }
+
+  console.log(tags); // ["tag-0", "tag-1", "tag-2"]
+}
+
+//Приклад-задача
+// Функція createArrayOfNumbers(min, max) приймає два параметра:
+// min - ціле число, з якого починаються обчислення, max - ціле число, до якого включно триватимуть обчислення
+// Доповни код функції createArrayOfNumbers(min, max) таким чином, щоб вона повертала масив усіх цілих чисел від значення min до max включно.
+
+{
+  function createArrayOfNumbers(min, max) {
+    const numbers = [];
+    for (let i = min; i <= max; i += 0.5) {
+      numbers.push(i);
+    }
+    return numbers;
+  }
+
+  console.log(createArrayOfNumbers(1, 3)); // 1, 3
+  console.log(createArrayOfNumbers(14, 17)); // 14, 16
+  console.log(createArrayOfNumbers(29, 34)); // 29, 31, 33
 }
 
 //#endregion
