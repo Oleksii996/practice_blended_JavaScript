@@ -57,3 +57,92 @@
 }
 
 //#endregion
+
+//#region Метод includes
+// Метод масиву includes() використовується для перевірки наявності певного елемента в масиві. Він повертає логічне значення true, якщо елемент знайдено в масиві, і false, якщо елемент відсутній.
+
+// Синтаксис методу includes() має такий вигляд:
+// array.includes(element)
+// де:
+// array — це вихідний масив, у якому здійснюється пошук елемента;
+// element — це елемент, наявність якого потрібно перевірити.
+
+{
+  const planets = ["Earth", "Mars", "Venus"];
+
+  console.log(planets.includes("Earth")); // true
+  console.log(planets.includes("Mars")); // true
+  console.log(planets.includes("Venus")); // true
+  console.log(planets.includes("Jupiter")); // false
+}
+
+//Метод includes() можна поєднувати з розгалуженнями для перевірки умов. Наприклад, виконати різний код залежно від наявності значення в масиві.
+{
+  const fruits = ["apple", "banana", "orange"];
+
+  if (fruits.includes("banana")) {
+    console.log("The array has an element banana"); // The array has an element banana
+  } else {
+    console.log("Array does not contain banana element"); // Array does not contain banana element
+  }
+}
+
+//Приклад-задача
+// Функція checkStorage(storage, item) приймає два параметри:
+//storage - масив рядків, що описує доступні товари на складі
+// item - рядок з назвою товара, наявність якого потрібно перевірити
+
+// Доповни код функції таким чином, щоб вона перевіряла, чи присутній такий товар в масиві storage і повертала:
+// рядок "<item> is available to order!", де item - це назва товара, якщо товар було знайдено
+// рядок "Sorry! We are out of stock!", якщо такого товара немає в масиві
+
+// Зроби так, щоб пошук за ім'ям товару був незалежний від регістру, тобто наприклад "plum" і "pLuM" мають бути знайдені у масиві ["apple", "plum", "pear"].
+
+{
+  function checkStorage(storage, item) {
+    if (storage.includes(item.toLowerCase())) {
+      //Без дужок (toLowerCase без ()) просто посиланняна сам метод як на об’єкт (функцію), але не викликаєте його
+      return `${item.toLowerCase()} is available to order!`;
+    } else {
+      return `Sorry! We are out of stock!`;
+    }
+  }
+
+  console.log(checkStorage(["apple", "plum", "pear"], "plum")); //
+  console.log(checkStorage(["apple", "plum", "pear"], "pLuM")); //
+  console.log(checkStorage(["apple", "plum", "pear"], "pear")); //
+  console.log(checkStorage(["apple", "plum", "pear"], "pEAr")); //
+  console.log(checkStorage(["apple", "plum", "pear"], "orange")); //
+  console.log(checkStorage(["apple", "plum", "pear"], "carrot")); //
+}
+
+//Приклад-задача
+//Перед розв'язанням цієї задачі варто зазначити, що таке спільні елементи. Спільними елементами масивів називають ті елементи, які присутні у всіх масивах. Наприклад, у двох масивах [1, 3, 5] і [0, 8, 5, 3] спільними будуть числа 3 і 5, оскільки вони присутні в обох вхідних масивах. А числа 0, 1 і 8 присутні тільки в одному з масивів.
+
+// Функція getCommonElements(array1, array2), приймає два масиви (array1 та array2) довільної довжини в якості параметрів.
+
+// Доповни код функції:
+// Створи порожній масив для зберігання нового масиву.
+// Використай цикл for для ітерації кожного елемента у array1.
+// У тілі циклу перевір, чи поточний елемент існує у array2 за допомогою методу includes.
+// Якщо він існує, то додай елемент до нового масиву.
+// Поверни наповнений масив спільних елементів як результат роботи функції.
+
+{
+  function getCommonElements(array1, array2) {
+    const array3 = [];
+    for (let i = 0; i < array1.length; i += 1) {
+      if (array2.includes(array1[i])) {
+        array3.push(array1[i]);
+      }
+    }
+    return array3;
+  }
+
+  console.log(getCommonElements([1, 2, 3], [2, 4])); //
+  console.log(getCommonElements([1, 2, 3], [2, 1, 17, 19])); //
+  console.log(getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27])); //
+  console.log(getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40])); //
+  console.log(getCommonElements([1, 2, 3], [10, 20, 30])); //
+}
+//#endregion
