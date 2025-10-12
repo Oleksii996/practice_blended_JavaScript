@@ -46,8 +46,8 @@
     return sum;
   }
 
-  console.log(calculateSum([1, 2, 3, 4, 5]));
-  console.log(calculateSum([1, 500, 5155]));
+  console.log(calculateSum([1, 2, 3, 4, 5])); // 15
+  console.log(calculateSum([1, 500, 5155])); // 5160
 }
 
 //Задача 2. Сума парних чисел

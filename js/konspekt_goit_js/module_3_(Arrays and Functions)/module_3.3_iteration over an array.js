@@ -146,3 +146,37 @@
   console.log(getCommonElements([1, 2, 3], [10, 20, 30])); //
 }
 //#endregion
+
+//#region Цикл for...of
+
+//Цикл for...of — це зручний спосіб перебору масиву. Тіло циклу буде виконуватися на кожному елементі масиву. Це гарна заміна циклу for, якщо не потрібен доступ до лічильника.
+// Синтаксис циклу for...of виглядає так:
+// for (let variable of array) {тіло циклу}
+
+//Приклад використання циклу for...of для масиву:
+
+{
+  const planets = ["Earth", "Mars", "Venus"];
+
+  for (const planet of planets) {
+    console.log(planet); // "Earth", "Mars", "Venus"
+  }
+}
+
+//Приклад-задача
+// Доповни код функції calculateTotalPrice(order) так, щоб вона повертала загальну суму чисел в масиві order. Використай цикл for...of для перебору масиву.
+{
+  function calculateTotalPrice(order) {
+    let sum = 0; // створюємо змінну, куди будемо накопичувати результат
+    for (const number of order) {
+      sum += number; // додаємо поточне i до суми
+    }
+    return sum; // повертаємо значення змінної sum
+  }
+}
+
+console.log(calculateTotalPrice([12, 85, 37, 4]));
+console.log(calculateTotalPrice([164, 48, 291]));
+console.log(calculateTotalPrice([412, 371, 94, 63, 176]));
+console.log(calculateTotalPrice([]));
+//#endregion
