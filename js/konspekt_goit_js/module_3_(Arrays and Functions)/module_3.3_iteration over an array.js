@@ -141,9 +141,9 @@
 
   console.log(getCommonElements([1, 2, 3], [2, 4])); //
   console.log(getCommonElements([1, 2, 3], [2, 1, 17, 19])); //
-  console.log(getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27])); //
-  console.log(getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40])); //
-  console.log(getCommonElements([1, 2, 3], [10, 20, 30])); //
+  console.log(getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27])); //[12,27,3]
+  console.log(getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40])); //[10,30,40]
+  console.log(getCommonElements([1, 2, 3], [10, 20, 30])); //[]
 }
 //#endregion
 
@@ -175,8 +175,8 @@
   }
 }
 
-console.log(calculateTotalPrice([12, 85, 37, 4]));
-console.log(calculateTotalPrice([164, 48, 291]));
-console.log(calculateTotalPrice([412, 371, 94, 63, 176]));
-console.log(calculateTotalPrice([]));
+console.log(calculateTotalPrice([12, 85, 37, 4])); //138
+console.log(calculateTotalPrice([164, 48, 291])); //503
+console.log(calculateTotalPrice([412, 371, 94, 63, 176])); //1116
+console.log(calculateTotalPrice([])); //0
 //#endregion

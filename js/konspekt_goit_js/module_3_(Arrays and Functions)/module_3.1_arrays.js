@@ -201,13 +201,13 @@ console.log(planets[999]); // undefined
   console.log(Boolean(nonEmptyArray)); // true
 
   if (emptyArray) {
-    console.log("if is in progress");
+    console.log("if is in progress"); //спрацює цей блок
   } else {
     console.log("else is not performed");
   }
 
   if (nonEmptyArray) {
-    console.log("if is in progress");
+    console.log("if is in progress"); //спрацює цей блок
   } else {
     console.log("else is not performed");
   }
