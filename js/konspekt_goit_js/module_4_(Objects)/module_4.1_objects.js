@@ -289,4 +289,185 @@
   console.log(book.isPublic); // false
   console.log(book.genres); // ["historical prose", "adventure", "drama"]
 }
+
+//Приклад
+// Доповни код, оновивши значення властивостей об'єкта apartment:
+
+{
+  const apartment = {
+    imgUrl: "https://via.placeholder.com/640x480",
+    descr: "Spacious apartment in the city center",
+    rating: 4,
+    price: 2153,
+    tags: ["premium", "promoted", "top"],
+    owner: {
+      name: "Henry",
+      phone: "982-126-1588",
+      email: "henry.carter@aptmail.com",
+    },
+  };
+
+  apartment.price = 5000;
+  console.log(apartment.price); // 5000
+  apartment.rating = 4.7;
+  console.log(apartment.rating); // 4.7
+  apartment.owner.name = "Henry Sibola";
+  console.log(apartment.owner.name); // Henry Sibola
+  apartment.tags.push("trusted");
+  console.log(apartment.tags); //[ 'premium', 'promoted', 'top', 'trusted' ]
+}
+
+//#endregion
+
+//#region Додавання властивостей
+// Операція додавання нової властивості після створення об'єкта нічим не відрізняється від зміни значення вже існуючої властивості.
+// Якщо під час запису значення за ключем така властивість відсутня в об'єкті, вона буде створена.
+
+{
+  const book = {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    genres: ["historical prose", "adventure"],
+    isPublic: true,
+    rating: 8.38,
+  };
+
+  book.pageCount = 836;
+  book.originalLanguage = "en";
+  book.translations = ["ua", "ru"];
+  book.price = {
+    hardcover: 39,
+    softcover: 29,
+  };
+
+  console.log(book.pageCount); // 836
+  console.log(book.originalLanguage); // "en"
+  console.log(book.translations); // ["ua", "ru"]
+}
+
+//Приклад
+// Додай об'єкту apartment кілька нових властивостей:
+
+{
+  const apartment = {
+    imgUrl: "https://via.placeholder.com/640x480",
+    descr: "Spacious apartment in the city center",
+    rating: 4.7,
+    price: 5000,
+    tags: ["premium", "promoted", "top", "trusted"],
+    owner: {
+      name: "Henry Sibola",
+      phone: "982-126-1588",
+      email: "henry.carter@aptmail.com",
+    },
+  };
+  apartment.area = 60;
+  console.log(apartment.area);
+  apartment.rooms = 3;
+  console.log(apartment.rooms);
+  apartment.location = {
+    country: "Jamaica",
+    city: "Kingston",
+  };
+  console.log(apartment.location.city);
+  console.log(apartment.location);
+}
+
+//#endregion
+
+//#region Короткі властивості
+// Іноді під час створення об'єкта значення властивості необхідно взяти зі змінної або параметра функції з таким самим ім'ям, як і сама властивість.
+
+// Синтаксис у наступному прикладі занадто громіздкий, адже доводиться дублювати ім'я властивості та ім'я змінної, в якій зберігається необхідне значення: name: name, і age: age,.
+{
+  const name = "Henry Sibola";
+  const age = 25;
+
+  const user = {
+    name: name,
+    age: age,
+  };
+
+  console.log(user.name); // "Henry Sibola"
+  console.log(user.age); // 25
+}
+
+//Синтаксис коротких властивостей (shorthand properties) вирішує цю проблему, дозволяючи використовувати ім'я змінної як ім'я властивості, а її значення як значення властивості.
+{
+  const name = "Henry Sibola";
+  const age = 25;
+
+  const user = {
+    name,
+    age,
+  };
+
+  console.log(user.name); // "Henry Sibola"
+  console.log(user.age); // 25
+}
+
+//Приклад
+// Доповни код оголошення об'єкта таким чином, щоб у нього були властивості name, price, image і tags зі значеннями зі змінних з аналогічними іменами. Обов'язково використовуй синтаксис коротких властивостей.
+{
+  const name = "Repair Droid";
+  const price = 2500;
+  const image = "https://via.placeholder.com/640x480";
+  const tags = ["on sale", "trending", "best buy"];
+
+  const product = {
+    name,
+    price,
+    image,
+    tags,
+  };
+
+  console.log(product.name); // "Repair Droid"
+  console.log(product.price); // 2500
+  console.log(product.image); // "https://via.placeholder.com/640x480"
+  console.log(product.tags); // ["on sale", "trending", "best buy"]
+}
+//#endregion
+
+//#region Обчислювальні властивості
+// Бувають ситуації, коли під час оголошення об'єкта необхідно додати властивість з ім'ям, яке ми заздалегідь не знаємо, тому що воно зберігається як значення змінної або як результат виконання функції.
+// Раніше для цього необхідно було спочатку створити об'єкт, а потім додавати властивості через квадратні дужки, що не зовсім зручно.
+{
+  const propName = "name";
+  const user = {
+    age: 25,
+  };
+
+  user[propName] = "Henry Sibola";
+  console.log(user.name); // "Henry Sibola"
+}
+
+//Синтаксис обчислювальних властивостей (computed properties) допомагає уникнути зайвого коду і в деяких випадках спростити його.
+// Значенням обчислювальної властивості може бути будь-який валідний вираз.
+{
+  const propName = "name";
+  const user = {
+    age: 25,
+    // ключ цієї властивості буде взято зі значення змінної propName
+    [propName]: "Henry Sibola",
+  };
+
+  console.log(user.name); // "Henry Sibola"
+}
+
+//Приклад
+// Використовуючи синтаксис обчислювальних властивостей, доповни код оголошення об'єкта credentials таким чином, щоб в результаті у нього були дві властивості: email і password, ключі яких зберігаються у змінних emailInputName і passwordInputName.
+// Значенням властивості email повинен бути рядок "henry.carter@aptmail.com", а значенням властивості password - рядок "jqueryismyjam".
+
+{
+  const emailInputName = "email";
+  const passwordInputName = "password";
+
+  const credentials = {
+    [emailInputName]: "henry.carter@aptmail.com",
+    [passwordInputName]: "jqueryismyjam",
+  };
+
+  console.log(credentials.email); //
+  console.log(credentials.password); //
+}
 //#endregion
