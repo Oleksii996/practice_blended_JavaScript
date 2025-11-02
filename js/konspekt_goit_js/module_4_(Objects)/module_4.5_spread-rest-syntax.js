@@ -98,12 +98,160 @@
   console.log(addOverNum(50, 15, 27)); // 0
   console.log(addOverNum(10, 12, 4, 11, 48, 10, 8)); // 71
   console.log(addOverNum(15, 32, 6, 13, 19, 8)); // 51
-  console.log(addOverNum(20, 74, 11, 62, 46, 12, 36)); // 137
+  console.log(addOverNum(20, 74, 11, 62, 46, 12, 36)); // 218
 }
 //#endregion
 
 //#region spread Входження параметрів
 // Ти вже знаєш, як отримати масив зі списку аргументів.
 // Інколи потрібно зробити протилежне — передати масив поелементно у функцію, яка викликається. Наприклад, є вбудована функція Math.max(), яка шукає та повертає найбільший з аргументів (чисел), тобто очікує не масив значень, а довільну кількість аргументів.
+
+{
+  Math.max(14, -4, 25, 8, 11);
+
+  //Уяви, що є масив температур у вигляді чисел [14, -4, 25, 8, 11].
+  // Як викликати для нього Math.max? Адже він очікує отримати список чисел, а не один масив.
+
+  const temps = [14, -4, 25, 8, 11];
+
+  console.log(temps); // [14, -4, 25, 8, 11]
+
+  // ❌ Так не спрацює, тому що передаємо цілий масив
+  console.log(Math.max(temps)); // NaN
+}
+
+//Тут доцільно використати оператор розпилення ...spread.
+// Він схожий на залишкові параметри — теж використовує ..., але робить абсолютно протилежне. Коли функціонал ...spread використовується при виклику функції, він перетворює масив на список аргументів.
+{
+  const temps = [14, -4, 25, 8, 11];
+
+  console.log(...temps); // 14 -4 25 8 11  набір окремих чисел
+
+  // ✅ Передамо колекцію елементів у якості окремих аргументів
+  console.log(Math.max(...temps)); // 25
+}
+
+//Приклад
+// Функція getExtremeScores(scores) приймає масив оцінок (чисел) у параметрі scores. Доповни код функції так, щоб вона повертала об'єкт із двома властивостями:
+// Властивість best має містити найбільше число з масиву scores
+// Властивість worst має містити найменше число з масиву scores.
+// Використовуй оператор (...spread) і методи Math.max() і Math.min().
+
+function getExtremeScores(scores) {
+  return {
+    best: Math.max(...scores),
+    worst: Math.min(...scores),
+  };
+}
+
+console.log(getExtremeScores([89, 64, 42, 17, 93, 51, 26])); // { best: 93, worst: 17 }
+console.log(getExtremeScores([19, 7, 4, 17, 81, 24])); // { best: 81, worst: 4 }
+//#endregion
+
+//#region Створення масиву
+// Операція ...spread дозволяє створити копію масиву або «склеїти» довільну кількість масивів в один новий. Досі для цього використовувалися методи slice() і concat(), але операція розпилення дозволяє зробити те саме в коротшій формі.
+// Розгляньмо приклад нижче, де створена копія масиву.
+{
+  const temps = [14, -4, 25, 8, 11];
+
+  // Це точна, але незалежна копія масиву temps
+  const copyOfTemps = [...temps];
+  console.log(copyOfTemps); // [14, -4, 25, 8, 11]
+}
+
+//Уяви, що temps — це ящик яблук, і ми хочемо створити його точну копію. Беремо порожній ящик і пересипаємо в нього яблука з вихідного ящика temps — розподіляємо його в іншу колекцію. За такої умови ящик temps не зміниться, у ньому все ще будуть яблука, а в новому ящику — їх точні копії.
+
+// У наступному прикладі ми зсипаємо яблука з двох ящиків в один новий.
+
+// Оригінальні ящики (масиви) не зміняться, а в новому будуть копії усіх їх яблук (елементів). Порядок розподілу важливий — він впливає на порядок елементів у новій колекції.
+{
+  const lastWeekTemps = [14, 25, 11];
+  const currentWeekTemps = [23, 17, 18];
+  const allTemps = [...lastWeekTemps, ...currentWeekTemps];
+  console.log(allTemps); // [14, 25, 11, 23, 17, 18]
+}
+
+//Приклад
+// У змінних firstGroupScores, secondGroupScores і thirdGroupScores зберігаються результати тестування окремих груп. Використовуючи розпилення, доповни код таким чином, щоб:
+// У змінній allScores зберігався масив всіх результатів від першої до третьої групи включно.
+// У змінній bestScore був найвищий загальний бал.
+// У змінній worstScore був найнижчий загальний бал.
+{
+  const firstGroupScores = [64, 42, 93];
+  const secondGroupScores = [89, 14, 51, 26];
+  const thirdGroupScores = [29, 47, 18, 97, 81];
+
+  const allScores = [
+    ...firstGroupScores,
+    ...secondGroupScores,
+    ...thirdGroupScores,
+  ];
+  const bestScore = Math.max(...allScores);
+  const worstScore = Math.min(...allScores);
+
+  console.log(allScores); //[64, 42, 93, 89, 14,51, 26, 29, 47, 18,97, 81]
+  console.log(bestScore); //97
+  console.log(worstScore); //14
+}
+//#endregion
+
+//#region Створення об'єкта
+// Операція spread дозволяє розпилити властивості довільної кількості об'єктів в один новий.
+{
+  const first = { propA: 5, propB: 10 };
+  const second = { propC: 15 };
+  const third = { ...first, ...second };
+  console.log(third); // { propA: 5, propB: 10, propC: 15 }
+}
+
+//Порядок розподілу має значення. Імена властивостей об'єкта — унікальні, тому властивості об'єкта, що розпиляються, можуть перезаписати значення вже існуючої властивості, якщо їх імена збігаються.
+{
+  const first = { propA: 5, propB: 10, propC: 50 };
+  const second = { propC: 15, propD: 20 };
+
+  const third = { ...first, ...second };
+  console.log(third); // { propA: 5, propB: 10, propC: 15, propD: 20 }
+
+  const fourth = { ...second, ...first };
+  console.log(fourth); // { propA: 5, propB: 10, propC: 50, propD: 20 }
+}
+
+//Якби яблука в ящику мали наліпки з позначками, то в одному ящику не могло б бути двох яблук з однаковими позначками. Тому, пересипаючи другий ящик, усі яблука, позначки яких будуть збігатися з тими, що вже знаходяться в новому ящику, замінять існуючі.
+// Під час розпилення можна додавати властивості в довільне місце. Головне пам'ятати про унікальність імені властивості і про те, що її значення може бути перезаписане.
+{
+  const first = { propA: 5, propB: 10, propC: 50 };
+  const second = { propC: 15 };
+
+  const third = { propB: 20, ...first, ...second };
+  console.log(third); // { propA: 5, propB: 10, propC: 15 }
+
+  const fourth = { ...first, ...second, propB: 20 };
+  console.log(fourth); // { propA: 5, propB: 20, propC: 15 }
+
+  const fifth = { ...first, propB: 20, ...second };
+  console.log(fifth); // { propA: 5, propB: 20, propC: 15 }
+}
+
+//Приклад
+// В конструкторі можна створювати нові тести, для яких є налаштування за замовчуванням, які зберігаються у змінній defaultSettings. Під час створення тесту, усі або частину налаштувань можна перевизначити, користувацькі налаштування зберігаються у змінній overrideSettings.
+// Для того щоб отримати фінальні налаштування тесту, необхідно взяти налаштування за замовчуванням і поверх них застосувати перевизначені користувацькі налаштування. Доповни код таким чином, щоб у змінній finalSettings утворився об'єкт фінальних налаштувань тесту.
+{
+  const defaultSettings = {
+    theme: "light",
+    public: true,
+    withPassword: false,
+    minNumberOfQuestions: 10,
+    timePerQuestion: 60,
+  };
+  const overrideSettings = {
+    public: false,
+    withPassword: true,
+    timePerQuestion: 30,
+  };
+
+  const finalSettings = { ...defaultSettings, ...overrideSettings };
+
+  console.log(finalSettings); //{ theme: 'light', public: false, withPassword: true, minNumberOfQuestions: 10, timePerQuestion: 30}
+}
 
 //#endregion
