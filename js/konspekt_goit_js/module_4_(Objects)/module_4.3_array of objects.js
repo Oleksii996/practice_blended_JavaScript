@@ -103,11 +103,11 @@
     }
   }
 
-  console.log(getProductPrice("Radar"));
-  console.log(getProductPrice("Grip"));
-  console.log(getProductPrice("Scanner"));
-  console.log(getProductPrice("Droid"));
-  console.log(getProductPrice("EngineА"));
+  console.log(getProductPrice("Radar")); //
+  console.log(getProductPrice("Grip")); //
+  console.log(getProductPrice("Scanner")); //
+  console.log(getProductPrice("Droid")); //
+  console.log(getProductPrice("EngineА")); //
 }
 
 //#endregion
