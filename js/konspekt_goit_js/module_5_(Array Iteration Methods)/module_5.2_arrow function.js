@@ -73,6 +73,107 @@
   // Якщо фігурні дужки відсутні, то повертається результат виразу, який стоїть після =>. Це називається неявне повернення (implicit return). У прикладі повернеться результат виразу додавання параметрів a, b і c.
 
   const add = (a, b, c) => a + b + c;
+
+  //Синтаксис неявного повернення суттєво скорочує «шум» оголошення функції з тілом і виразом, що повертається. Тим не менш, він доречний тільки тоді, коли в тілі функції не потрібно виконувати жодних додаткових інструкцій, окрім повернення значення.
+  {
+    // До
+    function classicAdd(a, b, c) {
+      return a + b + c;
+    }
+
+    // Після
+    const arrowAdd = (a, b, c) => a + b + c;
+  }
 }
 
+//Task
+// Виконай рефакторинг функції calculateTotalPrice() таким чином, щоб вона використовувала неявне повернення.
+
+const calculateTotalPrice = (quantity, pricePerItem) => quantity * pricePerItem;
+
+//#endregion
+
+//#region Псевдомасив arguments
+{
+  // У стрілочних функцій немає локальної змінної arguments, що містить усі аргументи. Якщо необхідно зібрати всі аргументи в масив, використовується операція rest.
+
+  const add = (...args) => {
+    console.log(args);
+  };
+
+  add(1, 2, 3); // [1, 2, 3]
+}
+
+//#endregion
+
+//#region Колбеки
+{
+  // Анонімні стрілочні функції відмінно підходять для колбеків перебираючих методів масиву завдяки коротшому синтаксису оголошення, особливо якщо код у тілі функції не громіздкий.
+
+  const numbers = [5, 10, 15, 20, 25];
+
+  // Звичайна анонімна функція
+  numbers.forEach(function (number, index) {
+    console.log(`Index ${index}, value ${number}`);
+  });
+
+  // Стрілочна анонімна функція
+  numbers.forEach((number, index) => {
+    console.log(`Index ${index}, value ${number}`);
+  });
+}
+
+{
+  //Стрілочну колбек-функцію також можна оголошувати окремо й передавати на неї посилання. Це варто робити, якщо одна функція використовується в декількох місцях програми або якщо вона громіздка.
+
+  const numbers = [5, 10, 15, 20, 25];
+
+  const logMessage = (number, index) => {
+    console.log(`Index ${index}, value ${number}`);
+  };
+
+  numbers.forEach(logMessage);
+}
+
+{
+  //Task
+  // Виконай рефакторинг функції calculateTotalPrice(orderedItems), замінивши її оголошення на стрілочну функцію. Також заміни колбек-функцію, передану в метод forEach(), на стрілочну функцію.
+
+  const calculateTotalPrice = (orderedItems) => {
+    let totalPrice = 0;
+
+    orderedItems.forEach((item) => {
+      totalPrice += item;
+    });
+
+    return totalPrice;
+  };
+
+  console.log(calculateTotalPrice([12, 85, 37, 4])); //138
+  console.log(calculateTotalPrice([164, 48, 291])); //503
+  console.log(calculateTotalPrice([412, 371, 94, 63, 176])); //1116
+}
+
+{
+  //Task «Фільтр чисел»
+  // Заміни оголошення функції filterArray() і колбек для методу forEach() на стрілочні функції.
+
+  const filterArray = (numbers, value) => {
+    const filteredNumbers = [];
+
+    numbers.forEach((number) => {
+      if (number > value) {
+        filteredNumbers.push(number);
+      }
+    });
+
+    return filteredNumbers;
+  };
+
+  console.log(filterArray([1, 2, 3, 4, 5], 3)); // [4, 5]
+  console.log(filterArray([1, 2, 3, 4, 5], 4)); // [5]
+  console.log(filterArray([1, 2, 3, 4, 5], 5)); // []
+  console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
+  console.log(filterArray([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+}
 //#endregion
