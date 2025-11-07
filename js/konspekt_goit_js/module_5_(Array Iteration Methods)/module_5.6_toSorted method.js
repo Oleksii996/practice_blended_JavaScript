@@ -58,9 +58,14 @@
     "Edgar Allan Poe",
   ];
 
-  const ascendingReleaseDates = releaseDates;
+  const ascendingReleaseDates = releaseDates.toSorted();
+  console.log(ascendingReleaseDates);
 
-  const alphabeticalAuthors = authors;
+  const alphabeticalAuthors = authors.toSorted();
+  console.log(alphabeticalAuthors);
 }
+//#endregion
+
+//#region Свій порядок сортування чисел
 
 //#endregion
