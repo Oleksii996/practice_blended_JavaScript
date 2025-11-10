@@ -495,12 +495,320 @@
       this.#email = newEmail;
     }
   }
-}
-//У прикладі вище оголошені геттер і сеттер email. Щоб оголосити геттер і сеттер, потрібно поставити перед ім'ям властивості відповідні ключові слова — get і set. Всередині цих методів:
-// повертаємо значення приватної властивості #email за допомогою геттера змінюємо її значення за допомогою сеттера
-// Також вважається гарною практикою називати геттери і сеттери так само, як і властивість, з якою вони працюють. Це спрощує читання коду та його розуміння. Коли інші розробники бачать геттер чи сеттер, який називається так само, як і властивість, вони можуть легко здогадатися, що цей метод служить для доступу до конкретної властивості. Наприклад, геттер і сеттер для приватної властивості #email найлогічніше називати просто email, як у прикладі вище.
 
-//Геттер і сеттер повинні називатися однаково.
-// Краще називати геттери і сеттери так само, як і властивість, з якою вони працюють. Геттер може існувати без сеттера, так само як і сеттер без геттера.
+  //У прикладі вище оголошені геттер і сеттер email. Щоб оголосити геттер і сеттер, потрібно поставити перед ім'ям властивості відповідні ключові слова — get і set. Всередині цих методів:
+  // повертаємо значення приватної властивості #email за допомогою геттера змінюємо її значення за допомогою сеттера
+  // Також вважається гарною практикою називати геттери і сеттери так само, як і властивість, з якою вони працюють. Це спрощує читання коду та його розуміння. Коли інші розробники бачать геттер чи сеттер, який називається так само, як і властивість, вони можуть легко здогадатися, що цей метод служить для доступу до конкретної властивості. Наприклад, геттер і сеттер для приватної властивості #email найлогічніше називати просто email, як у прикладі вище.
+
+  //Геттер і сеттер повинні називатися однаково.
+  // Краще називати геттери і сеттери так само, як і властивість, з якою вони працюють. Геттер може існувати без сеттера, так само як і сеттер без геттера.
+
+  //Розгляньмо приклад: геттер виконується при спробі отримати значення властивості, а сеттер — при спробі її змінити.
+  const mango = new User({
+    name: "Mango",
+    email: "mango@mail.com",
+  });
+
+  console.log(mango.email); // mango@mail.com
+
+  mango.email = "mango@supermail.com";
+
+  console.log(mango.email); // mango@supermail.com
+}
+
+//Звертаючись до mango.email, викликається геттер get email() {...} і виконується його код.
+// При спробі запису mango.email = "mango@supermail.com" викликається сеттер set email(newEmail) {...}, і рядок "mango@supermail.com" буде значенням параметра newEmail.
+
+{
+  //Task
+  // Виконай рефакторинг класу Car. Додатково до приватної властивості #brand зроби приватними властивості model і price. Стандартизуй публічний інтерфейс класу, замінивши вже оголошені методи на геттери та сеттери brand, model і price, для взаємодії з приватними властивостями.
+
+  class Car {
+    #model;
+    #price;
+    #brand;
+
+    constructor(params) {
+      this.#brand = params.brand;
+      this.#model = params.model;
+      this.#price = params.price;
+    }
+
+    // Геттер Сеттер Brand
+    get brand() {
+      return this.#brand;
+    }
+    set brand(newBrand) {
+      this.#brand = newBrand;
+    }
+
+    // Геттер Сеттер Model
+    get model() {
+      return this.#model;
+    }
+    set model(newModel) {
+      this.model = newModel;
+    }
+
+    // Геттер Сеттер Price
+    get price() {
+      return this.#price;
+    }
+    set price(newPrice) {
+      this.price = newPrice;
+    }
+  }
+}
+//#endregion
+
+//#region Статичні властивості
+// Крім публічних і приватних властивостей майбутнього екземпляра, у класі можна оголосити його власні властивості. Властивості, що доступні тільки класові, але не його екземплярам — це статичні властивості. Вони корисні для зберігання інформації, що стосується класу.
+// Статичні властивості оголошуються в тілі класу. Перед ім'ям властивості додається ключове слово static. Статичні властивості можна використовувати як у методах класу, так і поза класом.
+{
+  class MyClass {
+    static myProp = "value";
+  }
+
+  console.log(MyClass.myProp); // "value"
+}
+
+//У екземпляра немає доступу до статичних властивостей класу.
+{
+  class MyClass {
+    static myProp = "value";
+  }
+
+  const inst = new MyClass();
+  console.log(inst.myProp); // undefined
+}
+
+//Додамо класу користувача приватну властивість role — його роль, що визначає набір прав, наприклад: адміністратор, редактор, звичайний користувач тощо. Можливі ролі користувачів будемо зберігати як статичну властивість roles — об'єкт із властивостями.
+{
+  class User {
+    static roles = {
+      admin: "admin",
+      editor: "editor",
+      basic: "basic",
+    };
+
+    #email;
+    #role;
+
+    constructor(params) {
+      this.#email = params.email;
+      this.#role = params.role || User.roles.basic;
+    }
+
+    get role() {
+      return this.#role;
+    }
+
+    set role(newRole) {
+      this.#role = newRole;
+    }
+  }
+
+  const mango = new User({
+    email: "mango@mail.com",
+    role: User.roles.admin,
+  });
+
+  console.log(mango.role); // "admin"
+  mango.role = User.roles.editor;
+  console.log(mango.role); // "editor"
+}
+
+//Task
+// Виконай рефакторинг класу Car. Додай публічну статичну властивість maxPrice зі значенням число 50000 - максимально допустима ціна автомобіля.
+// Додай сеттеру price перевірку значення параметра newPrice, що передається. Якщо воно більше за maxPrice, сеттер нічого не робить, а якщо менше або дорівнює, то перезаписує ціну автомобіля.
+// Під оголошенням класу ми додали ініціалізації екземплярів і виклики методів, щоб показати, як будуть використовуватися геттери і сеттери price.
+{
+  class Car {
+    static maxPrice = 50000;
+    #price;
+
+    constructor(params) {
+      this.#price = params.price;
+    }
+
+    get price() {
+      return this.#price;
+    }
+
+    set price(newPrice) {
+      if (newPrice <= Car.maxPrice) {
+        this.#price = newPrice;
+      }
+    }
+  }
+
+  const audi = new Car({ price: 35000 });
+  console.log(audi.price); // 35000
+
+  audi.price = 49000;
+  console.log(audi.price); // 49000
+
+  audi.price = 51000;
+  console.log(audi.price); // 51000
+}
+//#endregion
+
+//#region Статичні методи
+// У класі можна оголосити не тільки методи майбутнього екземпляра, а й статичні методи. Статичні методи — це методи, доступні тільки класу. Вони можуть бути публічні та приватні.
+{
+  // Синтаксис оголошення статичних методів майже аналогічний статичним властивостям. Єдина відмінність — значенням буде метод.
+  class MyClass {
+    static myMethod() {
+      console.log("A static method");
+    }
+  }
+
+  MyClass.myMethod(); // "A static method"
+}
+
+//Додамо у клас User:
+// статичну властивість takenEmails для зберігання зайнятих пошт користувачів
+// статичний метод isEmailTaken, який перевіряє, чи доступна пошта
+// Під час ініціалізації екземпляра в конструкторі класу будемо додавати пошту в список зайнятих.
+{
+  class User {
+    static #takenEmails = [];
+
+    static isEmailTaken(email) {
+      return User.#takenEmails.includes(email);
+    }
+
+    #email;
+
+    constructor(params) {
+      this.#email = params.email;
+      User.#takenEmails.push(params.email);
+    }
+  }
+
+  const mango = new User({ email: "mango@mail.com" });
+
+  console.log(User.isEmailTaken("poly@mail.com")); // false
+  console.log(User.isEmailTaken("mango@mail.com")); // true
+}
+
+//Особливість статичних методів
+// Під час їх виклику ключове слово this посилається на сам клас. Це означає, що статичний метод може отримати доступ до статичних властивостей класу, але не до властивостей екземпляра. Це логічно, адже статичні методи викликає сам клас, а не його екземпляри.
+
+//Task
+// Додай класу Car публічний статичний метод checkPrice(price), що приймає ціну автомобіля. Метод повинен порівняти значення параметра price і приватної статичної властивості maxPrice.
+// Якщо ціна автомобіля перевищує максимальну, метод повинен повернути рядок "Error! Price exceeds the maximum.
+// В іншому випадку метод повинен повернути рядок "Success! Price is within acceptable limits".
+// Під оголошенням класу ми додали ініціалізацію екземпляра і виклики методів, щоб показати, як буде використовуватися метод checkPrice(price).
+{
+  class Car {
+    static #maxPrice = 50000;
+
+    static checkPrice(price) {
+      if (price > this.#maxPrice) {
+        return "Error! Price exceeds the maximum";
+      }
+      return "Success! Price is within acceptable limits";
+    }
+
+    constructor(params) {
+      this.price = params.price;
+    }
+  }
+
+  const audi = new Car({ price: 36000 });
+  const bmw = new Car({ price: 64000 });
+
+  console.log(Car.checkPrice(audi.price)); // "Success! Price is within acceptable limits"
+  console.log(Car.checkPrice(bmw.price)); // "Error! Price exceeds the maximum"
+
+  console.log(Car.checkPrice(36000)); // "Success! Price is within acceptable limits"
+  console.log(Car.checkPrice(18000)); // "Success! Price is within acceptable limits"
+  console.log(Car.checkPrice(64000)); // "Error! Price exceeds the maximum"
+  console.log(Car.checkPrice(57000)); // "Error! Price exceeds the maximum"
+}
+//#endregion
+
+//#region Наслідування класів
+// Ключове слово extends дозволяє реалізувати наслідування класів, коли один клас (дочірній, похідний) наслідує властивості й методи іншого класу (батьківського).
+{
+  //Розгляньмо приклад:
+  class Parent {}
+
+  class Child extends Parent {
+    // ...
+  }
+}
+//У виразі class Child extends Parent дочірній клас Child наслідує (розширює) від батьківського класу Parent.
+// Це означає, що ми можемо оголосити базовий клас, який зберігає загальні характеристики й методи для групи похідних класів, які наслідують властивості й методи батьківського, але також додають свої унікальні.
+
+//Уявімо, у застосунку є користувачі з різними ролями: адміністратор, копірайтер, контент-менеджер тощо. У кожного типу користувача є набір загальних характеристик, наприклад, пошта і пароль, але також є й унікальні.
+// Створивши незалежні класи для кожного типу користувача, ми отримаємо дублювання загальних властивостей і методів. Якщо необхідно змінити, наприклад, назву властивості, доведеться проходити по всіх класах, а це незручно й вимагає багато часу.
+
+//Замість цього можна:
+// створити загальний клас User, який буде зберігати набір загальних властивостей і методів
+// після чого створити класи для кожного типу користувача, які наслідують цей набір від класу User
+
+// За потреби змінити щось спільне, достатньо буде змінити тільки код класу User.
+{
+  //Клас ContentEditor наслідує від класу User його конструктор, геттер і сеттер email, а також приватну властивість #email.
+  class User {
+    #email;
+
+    constructor(email) {
+      this.#email = email;
+    }
+
+    get email() {
+      return this.#email;
+    }
+
+    set email(newEmail) {
+      this.#email = newEmail;
+    }
+  }
+
+  class ContentEditor extends User {
+    // Тіло класу ContentEditor
+  }
+
+  const editor = new ContentEditor("mango@mail.com");
+  console.log(editor); // { #email: "mango@mail.com" }
+  console.log(editor.email); // "mango@mail.com"
+}
+
+//Task
+{
+  // У застосунку потрібен адміністратор з можливістю додавати пошти користувачів у чорний список.
+  // Оголоси клас Admin, який наслідує від класу User
+  // Додай класу Admin публічну статичну властивість role (рівень доступу), значення якої — це об'єкт {BASIC: "basic", SUPERUSER: "superuser"}
+
+  class User {
+    constructor(email) {
+      this.email = email;
+    }
+
+    get email() {
+      return this.email;
+    }
+
+    set email(newEmail) {
+      this.email = newEmail;
+    }
+  }
+
+  class Admin extends User {
+    static role = {
+      BASIC: "basic",
+      SUPERUSER: "superuser",
+    };
+  }
+
+  console.log(Admin.role.BASIC); // "basic"
+  console.log(Admin.role.SUPERUSER); // "superuser"
+}
+//#endregion
+
+//#region Конструктор дочірнього класу
 
 //#endregion
