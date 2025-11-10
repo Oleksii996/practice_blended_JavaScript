@@ -810,5 +810,183 @@
 //#endregion
 
 //#region Конструктор дочірнього класу
+// У конструкторі дочірнього класу необхідно викликати спеціальну функцію super(args) — це псевдонім конструктора батьківського класу.
+// В іншому випадку при спробі звернутися до this у конструкторі дочірнього класу виникне помилка.
 
+{
+  // Під час виклику конструктора батьківського класу передаємо необхідні йому аргументи для ініціалізації властивостей.
+  class User {
+    #email;
+
+    constructor(email) {
+      this.#email = email;
+    }
+
+    get email() {
+      return this.#email;
+    }
+
+    set email(newEmail) {
+      this.#email = newEmail;
+    }
+  }
+
+  class ContentEditor extends User {
+    constructor(params) {
+      // Виклик конструктора батьківського класу User
+      super(params.email);
+
+      this.posts = params.posts;
+    }
+  }
+
+  const editor = new ContentEditor({
+    email: "mango@mail.com",
+    posts: [],
+  });
+  console.log(editor); // { #email: "mango@mail.com", posts: [] }
+  console.log(editor.email); // "mango@mail.com"
+}
+
+//Task
+{
+  // Додай класу Admin метод constructor, який приймає один параметр params- об'єкт налаштувань з двома властивостями email і access. Додай класу Admin публічну властивість access, значення якої буде передаватися під час виклику конструктора.
+  // Щоб показати, як буде використовуватися клас Admin, ми додали ініціалізацію екземпляра під оголошенням класу.
+  class User {
+    email;
+
+    constructor(email) {
+      this.email = email;
+    }
+
+    get email() {
+      return this.email;
+    }
+
+    set email(newEmail) {
+      this.email = newEmail;
+    }
+  }
+
+  class Admin extends User {
+    static role = {
+      BASIC: "basic",
+      SUPERUSER: "superuser",
+    };
+    constructor(params) {
+      super(params.email);
+      this.access = params.access;
+    }
+  }
+
+  const mango = new Admin({
+    email: "mango@mail.com",
+    access: Admin.role.SUPERUSER,
+  });
+
+  console.log(mango.email); // "mango@mail.com"
+  console.log(mango.access); // "superuser"
+
+  console.log(Admin.role.BASIC); // "basic"
+  console.log(Admin.role.SUPERUSER); // "superuser"
+}
+//#endregion
+
+//#region Методи дочірнього класу
+// Дочірній клас може використовувати методи та властивості батьківського класу. Крім цього, у дочірньому класі можна оголошувати методи, які будуть доступні тільки його екземплярам.
+
+{
+  class User {}
+  // Уявімо, що вище є оголошення класу User
+
+  class ContentEditor extends User {
+    constructor(params) {
+      super(params.email);
+      this.posts = params.posts;
+    }
+
+    addPost(post) {
+      this.posts.push(post);
+    }
+  }
+
+  const editor = new ContentEditor({
+    email: "mango@mail.com",
+    posts: [],
+  });
+
+  console.log(editor); // { #email: "mango@mail.com", posts: [], addPost: f }
+
+  editor.addPost("post-1");
+  editor.addPost("post-2");
+  console.log(editor.posts); // ['post-1', 'post-2']
+}
+//У прикладі бачимо, що ContentEditor успадковує клас User.
+// User — це базовий клас, який має приватну властивість #email.
+// ContentEditor розширює клас User і має власну властивість posts. Клас ContentEditor також має метод addPost, який дозволяє додавати нові повідомлення до posts.
+
+// Метод addPost — це метод дочірнього класу ContentEditor . Він буде доступний тільки екземплярам ContentEditor.
+
+{
+  //Task
+  // Додай класу Admin наступні властивості і методи.
+  // Публічну властивість blacklistedEmails для зберігання чорного списку поштових адрес користувачів. Значення за замовчуванням — це порожній масив.
+  // Публічний метод blacklist(email) для додавання пошти у чорний список. Метод повинен додавати значення параметра email в масив, що зберігається у властивості blacklistedEmails.
+  // Публічний метод isBlacklisted(email) для перевірки пошти у чорному списку. Метод повинен перевіряти наявність значення параметра email в масиві, що зберігається у властивості blacklistedEmails, і повертати true або false.
+  // Після оголошення класу ми додали ініціалізацію екземпляра і виклики методів у тій послідовності, в якій твій код перевірятимуть тести. Будь ласка, нічого там не змінюй.
+  {
+    class User {
+      email;
+
+      constructor(email) {
+        this.email = email;
+      }
+
+      get email() {
+        return this.email;
+      }
+
+      set email(newEmail) {
+        this.email = newEmail;
+      }
+    }
+    class Admin extends User {
+      static role = {
+        BASIC: "basic",
+        SUPERUSER: "superuser",
+      };
+
+      blacklistedEmails = [];
+
+      blacklist(email) {
+        this.blacklistedEmails.push(email);
+      }
+
+      isBlacklisted(email) {
+        if (this.blacklistedEmails.includes(email)) {
+          return true;
+        }
+        return false;
+      }
+
+      constructor(params) {
+        super(params.email);
+        this.access = params.access;
+      }
+    }
+
+    const mango = new Admin({
+      email: "mango@mail.com",
+      access: Admin.role.SUPERUSER,
+    });
+
+    console.log(mango.email); // "mango@mail.com"
+    console.log(mango.access); // "superuser"
+
+    mango.blacklist("poly@mail.com");
+    console.log(mango.blacklistedEmails); // ["poly@mail.com"]
+    console.log(mango.isBlacklisted("mango@mail.com")); // false
+    console.log(mango.isBlacklisted("poly@mail.com")); // true
+  }
+}
 //#endregion
