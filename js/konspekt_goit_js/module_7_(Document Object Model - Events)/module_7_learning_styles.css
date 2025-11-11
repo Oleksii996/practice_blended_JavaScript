@@ -8,6 +8,7 @@
   margin: 10px;
 }
 
+/* #region  */
 .module-7-3-creating-and-removing-elements {
   background-color: rgb(225, 234, 235);
   display: flex;
@@ -17,3 +18,14 @@
   padding: 20px;
   margin: 10px;
 }
+
+.usernames li {
+  padding: 8px;
+  border: 2px dashed tomato;
+  text-transform: uppercase;
+}
+
+.usernames li:not(:last-child) {
+  margin-bottom: 12px;
+}
+/* #endregion */
