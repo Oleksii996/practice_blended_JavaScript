@@ -1,0 +1,19 @@
+.module-7-2-properties-and-attributes {
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+  padding: 20px;
+  margin: 10px;
+}
+
+.module-7-3-creating-and-removing-elements {
+  background-color: rgb(225, 234, 235);
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+  padding: 20px;
+  margin: 10px;
+}

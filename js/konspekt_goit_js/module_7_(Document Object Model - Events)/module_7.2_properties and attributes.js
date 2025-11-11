@@ -124,6 +124,83 @@
 //#endregion
 
 //#region Властивість style
+// Властивість style використовується для читання та зміни вбудованих стилів з DOM-елементів. Вона повертає об'єкт, який містить список лише всіх вбудованих властивостей елемента, а не увесь CSS.
+// Під час запису властивості вони записуються в camelCase нотації, замість дефісів, які зазвичай використовуються в CSS, тобто background-color перетворюється на backgroundColor.
 {
+  const button = document.querySelector(".btn");
+
+  button.style.backgroundColor = "teal";
+  button.style.fontSize = "36px";
+  button.style.textAlign = "center";
+
+  console.log(button.style); // inline styles object
+}
+//#endregion
+
+//#region Доступ до атрибутів
+// DOM-елементам відповідають HTML-теги, які містять текстові атрибути.
+// Доступ до атрибутів здійснюється за допомогою стандартних методів. Ці методи працюють зі значенням, яке знаходиться в HTML.
+{
+  //Метод element.hasAttribute(nameAttribute)
+  // Метод приймає один аргумент — рядок nameAttribute, який містить ім’я атрибута для перевірки та повертає результат перевірки його наявності на елементі element — true чи false.
+
+  const image = document.querySelector(".image");
+  console.log(image.hasAttribute("src")); // true
+  console.log(image.hasAttribute("href")); // false
+}
+{
+  //Метод element.getAttribute(nameAttribute)
+  // Метод отримує один аргумент — рядок nameAttribute з іменем атрибута, і повертає значення цього атрибута для вказаного HTML-елемента element. Якщо атрибут не знайдено, метод повертає null.
+
+  const image = document.querySelector(".image");
+  console.log(image.getAttribute("alt")); // "Rocks and waterfall"
+}
+{
+  //Метод element.setAttribute(nameAttribute, value)
+  // Метод приймає два аргументи: рядок nameAttribute з іменем атрибута, який потрібно встановити або змінити, та value зі значенням, яке цьому атрибуту треба присвоїти. Метод встановлює або змінює значення зазначеного атрибута для вказаного HTML-елемента element.
+  const image = document.querySelector(".image");
+
+  image.setAttribute("alt", "Amazing nature");
+  console.log(image.getAttribute("alt")); // Amazing nature
+}
+{
+  //Метод element.removeAttribute(nameAttribute)
+  // Метод приймає один аргумент — рядок nameAttribute з іменем атрибута, який потрібно видалити зі вказаного HTML-елемента element — та видаляє його. Якщо зазначеного атрибута немає на елементі, метод не викликає жодних помилок та не робить нічого.
+
+  const image = document.querySelector(".image");
+
+  image.removeAttribute("alt");
+  console.log(image.hasAttribute("alt")); // false
+}
+//#endregion
+
+//#region Власні атрибути
+// Специфікацією HTML визначено вичерпний перелік атрибутів, які ми можемо додавати на ті чи інші теги (DOM-елементи) для того, щоб розмітка лишалась валідною, але інколи цього переліку недостатньо. Бувають випадки, коли нам потрібно зберегти певну інформацію на тезі, наприклад, вказати тип дії кнопки, щоб потім у певний момент часу мати можливість отримати до неї доступ. І тут на допомогу приходять власні data-атрибути.
+
+// Власні атрибути дозволяють додати до тегу довільний атрибут і отримати його значення в JavaScript.
+{
+  //Отримання значень
+  // Для отримання значення data-атрибута використовується властивість dataset, після якої через крапку пишеться ім'я атрибута без data-. Тобто data- відкидається, а інша частина імені записується як ім'я властивості об'єкта.
+
+  const saveBtn = document.querySelector('button[data-action="save"]');
+  console.log(saveBtn.dataset.action); // "save"
+
+  const closeBtn = document.querySelector('button[data-action="close"]');
+  console.log(closeBtn.dataset.action); // "close"
+
+  //Зміна значень
+  // Змінити значення існуючого data-атрибута або додати новий можна так само, як і будь-якої іншої властивості об'єкта в JavaScript. Щоб це зробити, треба отримати доступ до DOM-елемента, а потім змінити/задати значення властивості в об'єкті dataset.
+
+  // Змінюємо значення data-action для кнопки saveBtn
+  saveBtn.dataset.action = "update";
+
+  // Додаємо новий data-атрибут data-role
+  saveBtn.dataset.role = "admin";
+
+  // Перевіримо нові значення
+  console.log(saveBtn.dataset.action); // "update"
+  console.log(saveBtn.dataset.role); // "admin"
+
+  //Тепер data-action атрибут для saveBtn має значення "update" замість "save".
 }
 //#endregion
