@@ -102,10 +102,67 @@
 
       <button id="single" class="btn">SINGLE CALLBACK</button>
       <button id="multiple" class="btn">MULTIPLE CALLBACKS</button>
+
+      <!-- Метод removeEventListener() -->
+      <button class="btn js-add" style="background-color: aqua">
+        Add Listener
+      </button>
+      <button class="btn js-remove" style="background-color: aqua">
+        Remove Listener
+      </button>
+      <hr />
+      <button class="btn target-btn" style="background-color: aqua">
+        Click me
+      </button>
+
+      <!-- Module Об'єкт події -->
+      <button
+        style="background-color: rgb(135, 165, 118)"
+        type="button"
+        class="btn-object-event"
+      >
+        Click me
+      </button>
+
+      <!--  Властивості key і code -->
+      <button type="button" class="js-clear">Clear output</button>
+      <div class="log-list"></div>
     </div>
 
     <!-- Module 7.5 -->
-    <!-- Module 7.6 -->
+    <div class="module-7-5-form-element-events">
+      <!-- Подія submit -->
+      <form class="form" autocomplete="off">
+        <input type="text" name="login" placeholder="Login" />
+        <input type="password" name="password" placeholder="Password" />
+        <button class="btn" type="submit">Register</button>
+      </form>
+      <!-- Подія change -->
+      <p>Selected option text: <span class="text-output">none</span></p>
+
+      <p></p>
+      <p>Selected option value: <span class="value-output">none</span></p>
+
+      <p>
+        <select class="pizza-select">
+          <option value="four_meats">Four Meats</option>
+          <option value="royal_cheese">Royal Cheese</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="smoked_salmon">Smoked Salmon</option>
+        </select>
+      </p>
+      <!-- Подія change -->
+      <input type="text" class="text-input-45" />
+      <p>Text field value: <span class="output-45"></span></p>
+
+      <!-- Подія focus і blur -->
+      <button type="button" data-action="set">Set focus to input</button>
+      <button type="button" data-action="remove">
+        Remove focus from input
+      </button>
+      <br /><br />
+      <input type="text" class="text-input-46" />
+    </div>
 
     <!-- Скрипти -->
     <div class="scripts">
