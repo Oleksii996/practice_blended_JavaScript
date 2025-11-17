@@ -332,4 +332,54 @@
   console.log(stats); // { followers: 5603, views: 4827, likes: 1308 }
 }
 
+//Тепер додамо глибоку деструктуризацію властивостей об'єкта stats.
+// Для цього в деструктуризації після імені властивості ставимо двокрапку : та починаємо деструктуризацію об'єкта для цієї властивості.
+{
+  const user = {
+    name: "Jacques Gluke",
+    tag: "jgluke",
+    stats: {
+      followers: 5603,
+      views: 4827,
+      likes: 1308,
+    },
+  };
+
+  const {
+    name,
+    tag,
+    stats: { followers, views, likes },
+  } = user;
+
+  console.log(name); // Jacques Gluke
+  console.log(tag); // jgluke
+  console.log(followers); // 5603
+  console.log(views); // 4827
+  console.log(likes); // 1308
+}
+
+//Під час глибокої деструктуризації також можна змінювати імена змінних і присвоювати значення за замовчуванням, використовуючи вже знайомий тобі синтаксис.
+{
+  const user = {
+    name: "Jacques Gluke",
+    tag: "jgluke",
+    stats: {
+      followers: 5603,
+      views: 4827,
+      likes: 1308,
+    },
+  };
+
+  const {
+    name,
+    tag,
+    stats: { followers = 0, views: userViews = 0, likes: userLikes = 0 },
+  } = user;
+
+  console.log(name); // Jacques Gluke
+  console.log(tag); // jgluke
+  console.log(followers); // 5603
+  console.log(userViews); // 4827
+  console.log(userLikes); // 1308
+}
 //#endregion
