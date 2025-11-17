@@ -2,5 +2,6 @@
     "editor.quickSuggestions": {
         "comments": "on",
         "strings": "on"
-    }
+    },
+    "liveServer.settings.port": 5501
 }
