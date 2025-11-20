@@ -236,10 +236,9 @@ console.log(window.sessionStorage); // Storage {length: 0}
 //Останнім кроком необхідно додати код читання збереженого повідомлення з локального сховища і встановлення його початковим значенням для текстового поля під час завантаження сторінки.
 {
   const form = document.querySelector(".feedback-form");
-  const textarea = form.elements.message;
   const localStorageKey = "goit-example-message";
 
-  textarea.value = localStorage.getItem(localStorageKey) ?? "";
+  form.elements.message.value = localStorage.getItem(localStorageKey) ?? "";
 
   form.addEventListener("input", (evt) => {
     localStorage.setItem(localStorageKey, evt.target.value);
@@ -247,7 +246,6 @@ console.log(window.sessionStorage); // Storage {length: 0}
 
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    console.log(evt.target.elements.message.value);
     localStorage.removeItem(localStorageKey);
     form.reset();
   });
