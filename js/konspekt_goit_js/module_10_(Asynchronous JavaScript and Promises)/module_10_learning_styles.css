@@ -1,0 +1,16 @@
+body {
+  margin: 16px;
+  text-align: center;
+}
+
+.module_10-1_asynchrony {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin: 0 auto;
+
+  max-width: fit-content;
+
+  background-color: antiquewhite;
+}
