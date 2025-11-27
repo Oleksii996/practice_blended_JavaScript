@@ -80,4 +80,141 @@ const promise = new Promise((resolve, reject) => {
 // Якщо проміс виконається.
 // Якщо проміс не виконається.
 
+{
+  // У прикладі нижче callback-функція onResolve буде викликана через дві секунди, якщо проміс успішно виконається, а onReject буде викликана через дві секунди у тому разі, якщо проміс виконається з помилкою.
+
+  const isSuccess = true;
+
+  // Create promise
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isSuccess) {
+        resolve("Success! Value passed to resolve function");
+      } else {
+        reject("Error! Error passed to reject function");
+      }
+    }, 2000);
+  });
+
+  // Registering promise callbacks
+  promise.then(
+    (value) => {
+      console.log(value); // "Success! Value passed to resolve function"
+    },
+    (error) => {
+      console.log(error); // "Error! Error passed to reject function"
+    }
+  );
+}
+//Якщо функції onResolve і onReject містять складну логіку, їх для зручності оголошують як зовнішні функції і передають у метод then() за ім'ям.
+//#endregion
+
+//#region Метод catch()
+// На практиці в методі then() обробляють тільки успішне виконання промісу. Помилку його виконання обробляють у спеціальному методі catch() для «відловлювання» помилок.
+{
+  promise
+    .then((value) => {
+      // Promise fulfilled
+    })
+    .catch((error) => {
+      // Promise rejected
+    });
+}
+
+//Колбек-функція в методі catch буде викликана в разі виконання промісу з помилкою, і отримає цю помилку як аргумент. Метод catch має йти після then.
+{
+  // Винесемо обробку помилки з методу then у метод catch.
+  const isSuccess = true;
+
+  // Create promise
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isSuccess) {
+        resolve("Success! Value passed to resolve function");
+      } else {
+        reject("Error! Error passed to reject function");
+      }
+    }, 2000);
+  });
+
+  // Registering promise callbacks
+  promise
+    .then((value) => {
+      console.log(value); // "Success! Value passed to resolve function"
+    })
+    .catch((error) => {
+      console.log(error); // "Error! Error passed to reject function"
+    });
+}
+//#endregion
+
+//#region Метод finally()
+// Цей метод може бути корисним, якщо необхідно виконати код після того, як проміс буде виконаний незалежно від результату (fulfilled або rejected).
+{
+  promise
+    .then((value) => {
+      // Promise fulfilled
+    })
+    .catch((error) => {
+      // Promise rejected
+    })
+    .finally(() => {
+      // Promise fulfilled or rejected
+    });
+}
+
+//Метод finally() дозволяє уникнути дублювання коду в обробниках then() і catch().
+{
+  // Колбек-функція не отримає жодних аргументів, оскільки неможливо визначити, чи був проміс виконаний або відхилений. Тут буде виконуватися код, який необхідно запустити в будь-якому разі.
+  const isSuccess = true;
+
+  // Create promise
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isSuccess) {
+        resolve("Success! Value passed to resolve function");
+      } else {
+        reject("Error! Error passed to reject function");
+      }
+    }, 2000);
+  });
+
+  // Registering promise callbacks
+  promise
+    .then((value) => console.log(value)) // "Success! Value passed to resolve function"
+    .catch((error) => console.log(error)) // "Error! Error passed to reject function"
+    .finally(() => console.log("Promise settled")); // "Promise settled"
+}
+//#endregion
+
+//#region Ланцюжки промісів
+// Метод then() повертає новий проміс, який у свою чергу отримує значення від своєї callback-функції onResolve. Ця особливість дозволяє формувати послідовність асинхронних операцій, зв'язуючи проміси в ланцюжок.
+
+//Метод then() повертає проміс. Перед його виконанням може минути деякий час, отже, частина ланцюжка, що залишилася, буде чекати на результат. У разі виникнення помилки в будь-якому місці ланцюжка, виконання всіх наступних then() скасовується, а управління передається методу catch(). Тому він має знаходитись у кінці ланцюжка усіх then().
+{
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(5);
+    }, 2000);
+  });
+
+  promise
+    .then((value) => {
+      console.log(value); // 5
+      return value * 2;
+    })
+    .then((value) => {
+      console.log(value); // 10
+      return value * 3;
+    })
+    .then((value) => {
+      console.log(value); // 30
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      console.log("finally");
+    });
+}
 //#endregion
